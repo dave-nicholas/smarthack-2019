@@ -1,0 +1,23 @@
+{
+  "name": "smarthack-2019",
+  "version": "1.0.0",
+  "main": "build/index.js",
+  "repository": "git@github.com:dave-nicholas/smarthack-2019.git",
+  "author": "Dave Nicholas <davenicholasuk@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "rm -rf build/ && tsc",
+    "start": "node build/index.js",
+    "build:start": "npm run build && npm run start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "github-webhook-handler": "^0.7.1",
+    "typescript": "^3.2.2"
+  },
+  "devDependencies": {
+    "@types/node": "^10.12.18",
+    "ts-node": "^7.0.1"
+  }
+}
