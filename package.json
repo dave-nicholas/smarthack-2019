@@ -8,8 +8,8 @@
   "private": true,
   "scripts": {
     "build": "rm -rf build/ && tsc",
-    "start": "node build/index.js",
-    "build:start": "npm run build && npm run start",
+    "serve": "node build/index.js",
+    "start": "npm run build && npm run start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
