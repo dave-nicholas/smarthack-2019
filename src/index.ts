@@ -1,14 +1,20 @@
 import * as http from "http";
 import createHandler from "github-webhook-handler";
+import "dotenv";
 import { Gpio } from "onoff";
 
 const gpio4 = new Gpio(4, "out");
 
 const makeMonkeyDance = () => {
-  if (gpio4.readSync() === 0) { gpio4.writeSync(1); }
+  if (gpio4.readSync() === 0) {
+    gpio4.writeSync(1);
+  }
 };
 
-const handler = createHandler({ path: "/webhook", secret: "myhashsecret" });
+const handler = createHandler({
+  path: "/webhook",
+  secret: process.env.GIT_WEBHOOK_SECRET || ""
+});
 
 http
   .createServer((req: http.IncomingMessage, res: http.ServerResponse) => {
@@ -19,11 +25,11 @@ http
   })
   .listen(4567);
 
-handler.on("error", function (err) {
+handler.on("error", function(err) {
   console.error("Error:", err.message);
 });
 
-handler.on("push", function (event) {
+handler.on("push", function(event) {
   console.log(
     "Received a push event for %s to %s",
     event.payload.repository.name,
@@ -31,7 +37,7 @@ handler.on("push", function (event) {
   );
 });
 
-handler.on("issues", function (event) {
+handler.on("issues", function(event) {
   makeMonkeyDance();
   console.log(
     "Received an issue event for %s action=%s: #%d %s",
