@@ -1,4 +1,4 @@
-import { Gpio } from "onoff";
+const Gpio = require("onoff").Gpio;
 const ledIO = new Gpio(17, "out");
 const monkeyIO = new Gpio(4, "out");
 
