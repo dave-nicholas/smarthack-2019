@@ -1,15 +1,18 @@
 import * as http from "http";
 import createHandler from "github-webhook-handler";
-import "dotenv";
+import "dotenv/config";
 import { Gpio } from "onoff";
+
+
 
 const gpio4 = new Gpio(4, "out");
 
 const makeMonkeyDance = () => {
-  if (gpio4.readSync() === 0) {
-    gpio4.writeSync(1);
-  }
+  gpio4.writeSync(1);
+  setTimeout(() => gpio4.writeSync(0), 2000);
 };
+
+console.log("gh secret:", process.env.GIT_WEBHOOK_SECRET);
 
 const handler = createHandler({
   path: "/webhook",
