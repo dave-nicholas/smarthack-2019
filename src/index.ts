@@ -1,16 +1,8 @@
 import * as http from "http";
 import createHandler from "github-webhook-handler";
 import "dotenv/config";
-import { Gpio } from "onoff";
 
-
-
-const gpio4 = new Gpio(4, "out");
-
-const makeMonkeyDance = () => {
-  gpio4.writeSync(1);
-  setTimeout(() => gpio4.writeSync(0), 2000);
-};
+import { monkeyDance, flashEyes } from "./gpio";
 
 console.log("gh secret:", process.env.GIT_WEBHOOK_SECRET);
 
@@ -33,6 +25,8 @@ handler.on("error", function(err) {
 });
 
 handler.on("push", function(event) {
+  monkeyDance();
+  flashEyes(10000);
   console.log(
     "Received a push event for %s to %s",
     event.payload.repository.name,
@@ -41,7 +35,8 @@ handler.on("push", function(event) {
 });
 
 handler.on("issues", function(event) {
-  makeMonkeyDance();
+  monkeyDance();
+  flashEyes(10000);
   console.log(
     "Received an issue event for %s action=%s: #%d %s",
     event.payload.repository.name,
