@@ -2,7 +2,7 @@ import { Gpio } from "onoff";
 
 const monkeyGPIO = new Gpio(4, "out");
 const leftEyeGPIO = new Gpio(2, "out");
-const rightEyeGPIO = new Gpio(17, "out");
+const rightEyeGPIO = new Gpio(26, "out");
 
 export const monkeyDance = () => {
   monkeyGPIO.writeSync(1);
