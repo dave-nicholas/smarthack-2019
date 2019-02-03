@@ -3,6 +3,7 @@ import createHandler from "github-webhook-handler";
 import "dotenv/config";
 
 import { monkeyDance, flashEyes } from "./gpio";
+import { mushMuscle } from "./sound";
 
 console.log("gh secret:", process.env.GIT_WEBHOOK_SECRET);
 
@@ -36,7 +37,8 @@ handler.on("push", function(event) {
 
 handler.on("issues", function(event) {
   monkeyDance();
-  flashEyes(10000);
+  mushMuscle.play();
+  flashEyes(25000);
   console.log(
     "Received an issue event for %s action=%s: #%d %s",
     event.payload.repository.name,
