@@ -19,8 +19,21 @@ const flashingEyes = () => {
   }
 };
 
-export const flashEyes = (time: number) => {
-  const interval = setInterval(flashingEyes, 250);
+const alternateFlashEyes = () => {
+  if (leftEyeGPIO.readSync() === 0) {
+    leftEyeGPIO.writeSync(1);
+    rightEyeGPIO.writeSync(0);
+  } else {
+    leftEyeGPIO.writeSync(0);
+    rightEyeGPIO.writeSync(1);
+  }
+};
+
+export const flashEyes = (time: number, alternate: boolean = false) => {
+  const interval = setInterval(
+    alternate ? alternateFlashEyes : flashingEyes,
+    250
+  );
   setTimeout(() => {
     clearInterval(interval);
     leftEyeGPIO.writeSync(0);
