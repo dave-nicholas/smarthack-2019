@@ -3,6 +3,7 @@ import "dotenv/config";
 
 import { monkeyDance, flashEyes } from "./gpio";
 import { mushMuscle, vote, questions } from "./sound";
+import { speak } from "./speak";
 
 export const gitWebHookHandler = createHandler({
   path: "/webhook",
@@ -27,7 +28,8 @@ gitWebHookHandler.on("push", async event => {
 
 gitWebHookHandler.on("issues", async event => {
   await questions.play();
-  monkeyDance();
+  // monkeyDance();
+  speak(event.payload.issue.title);
   flashEyes(25000);
   console.log(
     "Received an issue event for %s action=%s: #%d %s",
