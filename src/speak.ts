@@ -6,4 +6,4 @@ sudo apt-get install espeak
 */
 
 export const speak = (somethingToSay: string) =>
-  exec(`espeak "${somethingToSay}" 2>/dev/null`);
+  exec(`espeak -ven-us -s165 -g12 "${somethingToSay}" 2>/dev/null`);
