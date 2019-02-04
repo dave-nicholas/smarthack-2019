@@ -40,4 +40,3 @@ gitWebHookHandler.on("issues", async event => {
   );
 });
 
-speak("Hello everyone, I am the git bot Monkey..... yeah baby!");
