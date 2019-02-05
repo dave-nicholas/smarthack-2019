@@ -2,6 +2,7 @@ import * as http from "http";
 import { gitWebHookHandler } from "./gitwebhooks";
 import { speak }  from "./speak";
 import { helloCutiePie } from "./sound";
+import { flashEyes } from './gpio';
 
 http
   .createServer((req: http.IncomingMessage, res: http.ServerResponse) => {
@@ -14,7 +15,8 @@ http
 
 
 const welcome = () => {
-  helloCutiePie.play();
+  // helloCutiePie.play();
+  flashEyes(10000, true);
   speak("Hello everyone, I am the smart pension git bot Monkey..... oh yes baby!");
 };
 
