@@ -23,14 +23,14 @@ gitWebHookHandler.on("pull_request_review_comment", event => playVote());
 gitWebHookHandler.on("push", async event => {
   await mushMuscle.play();
   monkeyDance();
-  flashEyes(10000);
+  flashEyes(25000);
 });
 
 gitWebHookHandler.on("issues", async event => {
   await questions.play();
   // monkeyDance();
   speak(event.payload.issue.title);
-  flashEyes(25000);
+  flashEyes(10000);
   console.log(
     "Received an issue event for %s action=%s: #%d %s",
     event.payload.repository.name,
