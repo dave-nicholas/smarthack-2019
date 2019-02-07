@@ -27,3 +27,10 @@ app.post('/', (req, res) => {
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
+const welcome = () => {
+  flashEyes(5000);
+  speak("Hello I am the smart pension git bot monkey");
+}
+  
+welcome();
+
