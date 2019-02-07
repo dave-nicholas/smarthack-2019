@@ -1,5 +1,6 @@
 import { Gpio } from "onoff";
 import { speak } from "./speak";
+import { flashEyes } from "./gpio";
 
 const triggerGPIO = new Gpio(22, "out");
 const echoGPIO = new Gpio(23, "in", "both");
@@ -23,6 +24,7 @@ const watchHCSR04 = () => {
      
       if(delta < threshold) { 
         console.log('close');
+        flashEyes(1000, true);
         speak("fuck off");
       }
     }
