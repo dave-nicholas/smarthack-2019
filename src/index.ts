@@ -5,7 +5,7 @@ import { speak }  from "./speak";
 import { helloCutiePie } from "./sound";
 import { flashEyes } from './gpio';
 
-import { verify, postImg, sendCameraToSlack } from "./slack";
+import { verify, postImg, sendCameraToSlack, photo } from "./slack";
 import { githubRequestHandler } from './github-request-handler';
 
 
@@ -16,6 +16,7 @@ const port = 4567;
 app.use(bodyParser.json());
 
 app.post('/slack', verify);
+app.post('/photo', photo);
 
 app.get('/', (req, res) => res.send('-= SmartHack Github =-'));
 
