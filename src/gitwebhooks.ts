@@ -13,24 +13,24 @@ export const gitWebHookHandler = createHandler({
 gitWebHookHandler.on("error", err => console.error("Error:", err.message));
 
 const playVote = () => {
-  flashEyes(5000);
-  vote.play();
+  // flashEyes(5000);
+  // vote.play();
 };
 
 gitWebHookHandler.on("pull_request_review", event => playVote());
 gitWebHookHandler.on("pull_request_review_comment", event => playVote());
 
 gitWebHookHandler.on("push", async event => {
-  await mushMuscle.play();
-  monkeyDance();
-  flashEyes(25000);
+  // await mushMuscle.play();
+  // monkeyDance();
+  // flashEyes(25000);
 });
 
 gitWebHookHandler.on("issues", async event => {
-  await questions.play();
+  // await questions.play();
   // monkeyDance();
-  speak(event.payload.issue.title);
-  flashEyes(10000);
+  // speak(event.payload.issue.title);
+  // flashEyes(10000);
   console.log(
     "Received an issue event for %s action=%s: #%d %s",
     event.payload.repository.name,

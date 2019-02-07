@@ -1,23 +1,29 @@
-import * as http from "http";
+import express from "express";
+import bodyParser from "body-parser"
 import { gitWebHookHandler } from "./gitwebhooks";
 import { speak }  from "./speak";
 import { helloCutiePie } from "./sound";
 import { flashEyes } from './gpio';
 
-http
-  .createServer((req: http.IncomingMessage, res: http.ServerResponse) => {
-    gitWebHookHandler(req, res, (err: Error) => {
-      res.statusCode = 404;
-      res.end("no such location");
-    });
-  })
-  .listen(4567);
+const app = express();
 
+const port = 4567;
 
-const welcome = () => {
-  // helloCutiePie.play();
-  flashEyes(10000, true);
-  speak("Hello everyone, I am the smart pension git bot Monkey..... oh yes baby!");
-};
+app.use(bodyParser.json());
 
-welcome();
+app.post('/slack', (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+  console.log(req.body)
+  res.send(JSON.stringify({"challenge":req.body.challenge}));
+});
+
+app.post('/', (req, res) => {
+  console.log("!!!!!")
+  gitWebHookHandler(req, res, (err: Error) => {
+    res.statusCode = 404;
+    res.end("no such location");
+  });
+})
+
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+
