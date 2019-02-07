@@ -6,7 +6,7 @@ import { flashEyes } from './gpio';
 
 import { verify, postImg, sendCameraToSlack } from "./slack";
 import { githubRequestHandler } from './github-request-handler';
-
+import { watchSensor } from './ultrasonic-sensor';
 
 const app = express();
 
@@ -28,11 +28,13 @@ const loadImg = () => {
   
 }
 
- loadImg();
+ //loadImg();
 
 const welcome = () => {
   flashEyes(5000);
   speak("Hello I am the smart pension git bot monkey");
 }
+
+watchSensor();
   
 // welcome();
