@@ -1,10 +1,10 @@
 import { Gpio } from "onoff";
+import { speak } from "./speak";
 
 const triggerGPIO = new Gpio(22, "out");
-const echoGPIO = new Gpio(23, "in");
+const echoGPIO = new Gpio(23, "in", "both");
 
-// The number of microseconds it takes sound to travel 1cm at 20 degrees celcius
-const MICROSECDONDS_PER_CM = 1e6 / 34321;
+const threshold: number = 128;
 
 triggerGPIO.writeSync(0);
 
@@ -19,18 +19,25 @@ const watchHCSR04 = () => {
       startTick = Date.now();
     } else {
       const endTick = Date.now();
-      const diff = (endTick >> 0) - (startTick >> 0); // Unsigned 32 bit arithmetic
-      console.log(diff / 2 / MICROSECDONDS_PER_CM);
+      const delta = endTick - startTick;
+     
+      if(delta < threshold) { 
+        console.log('close');
+        speak("fuck off");
+      }
     }
   });
 };
 
-watchHCSR04();
+export const watchSensor = () => { 
 
-// Trigger a distance measurement once per second
-setInterval(() => {
-  triggerGPIO.writeSync(1);
-  setTimeout(() => {
-    triggerGPIO.writeSync(0);
-  }, 10);
-}, 1000);
+  watchHCSR04();
+
+  // Trigger a distance measurement once per second
+  setInterval(() => {
+    triggerGPIO.writeSync(1);
+    setTimeout(() => {
+      triggerGPIO.writeSync(0);
+    }, 10);
+  }, 1000);
+};

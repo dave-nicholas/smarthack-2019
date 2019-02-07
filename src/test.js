@@ -1,5 +1,5 @@
 const Gpio = require("onoff").Gpio;
-const ledIO = new Gpio(4, "out");
+const ledIO = new Gpio(2, "out");
 const monkeyIO = new Gpio(26, "out");
 
 ledIO.writeSync(1);
