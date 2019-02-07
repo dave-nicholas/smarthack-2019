@@ -33,3 +33,9 @@ const loadImg = () => {
 
 // loadImg();
 
+const welcome = () => {
+  flashEyes(5000);
+  speak("Hello I am the smart pension git bot monkey");
+}
+  
+welcome();
