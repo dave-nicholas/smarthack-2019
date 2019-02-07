@@ -1,10 +1,11 @@
+import "dotenv/config"
 import express from "express";
 import bodyParser from "body-parser"
 import { speak }  from "./speak";
 import { helloCutiePie } from "./sound";
 import { flashEyes } from './gpio';
 
-import { verify, postImg, sendCameraToSlack } from "./slack";
+import { verify, postImg, sendCameraToSlack, photo } from "./slack";
 import { githubRequestHandler } from './github-request-handler';
 import { watchSensor } from './ultrasonic-sensor';
 
@@ -15,6 +16,7 @@ const port = 4567;
 app.use(bodyParser.json());
 
 app.post('/slack', verify);
+app.post('/photo', photo);
 
 app.get('/', (req, res) => res.send('-= SmartHack Github =-'));
 
