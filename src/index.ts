@@ -5,7 +5,7 @@ import { speak }  from "./speak";
 import { helloCutiePie } from "./sound";
 import { flashEyes } from './gpio';
 import path from "path";
-import { verify, postImg } from "./slack";
+import { verify, postImg, sendCameraToSlack } from "./slack";
 
 const app = express();
 
@@ -26,16 +26,15 @@ app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
 const loadImg = () => {
   
-  const filePath = path.resolve('src', 'test.png');
-
-  postImg(filePath, "And another image");
+  sendCameraToSlack("A Slack image")
+  
 }
 
-// loadImg();
+ loadImg();
 
 const welcome = () => {
   flashEyes(5000);
   speak("Hello I am the smart pension git bot monkey");
 }
   
-welcome();
+// welcome();
