@@ -23,6 +23,12 @@ export const verify = (req: express.Request, res: express.Response) => {
   }
 }
 
+export const photo = (req: any, res: any) => {
+  res.setHeader('Content-Type', 'application/json');
+  res.send()
+  sendCameraToSlack("Slack photo")
+}
+
 export const sendCameraToSlack = (message: string) => {
   camera.takePhoto('photo').then((photo) => {
     postImg(photo, message)
