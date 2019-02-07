@@ -3,6 +3,9 @@ import fs from "fs";
 import { WebClient } from '@slack/client';
 import { flashEyes } from './gpio';
 import { speak }  from "./speak";
+import { Raspistill } from "node-raspistill";
+
+const camera = new Raspistill();
 
 const token = process.env.SLACK_API_TOKEN;
 const channels = process.env.SLACK_CHANNELS;
@@ -20,14 +23,19 @@ export const verify = (req: express.Request, res: express.Response) => {
   }
 }
 
-export const postImg = (filePath: string, title: string) => {
-  const file = fs.createReadStream(filePath);
+export const sendCameraToSlack = (message: string) => {
+  camera.takePhoto('photo').then((photo) => {
+    postImg(photo, message)
+  })
+}
+
+export const postImg = (file: any, title: string) => {
 
   web.files.upload({ file, channels, title })
     .then((response) => {
       console.log(`File uploaded as Stream`);
     })
-    .catch((error) => {
+    .catch((error: any) => {
       console.log('File upload as Stream error:');
       console.log(error);
     });

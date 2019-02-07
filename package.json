@@ -24,6 +24,7 @@
     "github-webhook-handler": "^0.7.1",
     "ngrok": "^3.1.0",
     "node-mp3-player": "^1.0.3",
+    "node-raspistill": "^0.0.16",
     "onoff": "^3.2.2",
     "path": "^0.12.7",
     "typescript": "^3.2.2"
