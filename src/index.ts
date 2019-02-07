@@ -1,11 +1,12 @@
 import express from "express";
 import bodyParser from "body-parser"
-import { gitWebHookHandler } from "./gitwebhooks";
 import { speak }  from "./speak";
 import { helloCutiePie } from "./sound";
 import { flashEyes } from './gpio';
-import path from "path";
+
 import { verify, postImg, sendCameraToSlack } from "./slack";
+import { githubRequestHandler } from './github-request-handler';
+
 
 const app = express();
 
@@ -15,12 +16,9 @@ app.use(bodyParser.json());
 
 app.post('/slack', verify);
 
-app.post('/', (req, res) => {
-  gitWebHookHandler(req, res, (err: Error) => {
-    res.statusCode = 404;
-    res.end("no such location");
-  });
-})
+app.get('/', (req, res) => res.send('-= SmartHack Github =-'));
+
+app.post('/github', (req, res) => githubRequestHandler(req, res));
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
