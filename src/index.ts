@@ -33,9 +33,9 @@ const loadImg = () => {
 
 const welcome = () => {
   flashEyes(5000);
-  speak("Hello eveyone I am the smart pension git bot monkey");
+  speak("Hello everyone I am the smart pension git bot monkey");
 };
 
-watchSensor();
+setTimeout(() => watchSensor(), 10000);
 
 welcome();

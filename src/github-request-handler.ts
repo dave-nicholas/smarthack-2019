@@ -12,7 +12,7 @@ const handlePushEvent = (ref: string, commits: Array<any>, repo: any) => {
     const isMaster = headArray[headArray.length - 1] === "master";
     if (isMaster) {
       speak(
-        `Commit incoming on ${repo.name} from ${commits[0].committer.name}`
+        `${commits[0].committer.name} is trying to break the internet by pushing code to ${repo.name}`
       );
       flashEyes(5000);
       console.log("author: ", commits[0].author);
@@ -37,7 +37,7 @@ const handleCommitComment = (comment: any, repo: any) => {
 const handleIssue = (issue: any) => {
   if (issue) {
     speak(
-      `${issue.issue.user.login} has just ${issue.action} issue ${
+      `instead of minding his own business ${issue.issue.user.login} has ${issue.action} an issue ${
         issue.issue.title
       }`
     );

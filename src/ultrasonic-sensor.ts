@@ -1,7 +1,6 @@
 import { Gpio } from "onoff";
 import { speak } from "./speak";
 import { flashEyes } from "./gpio";
-import { sendCameraToSlack } from "./slack";
 
 const triggerGPIO = new Gpio(22, "out");
 const echoGPIO = new Gpio(23, "in", "both");
@@ -22,11 +21,10 @@ const watchHCSR04 = () => {
     } else {
       const endTick = Date.now();
       const delta = endTick - startTick;
-
+      console.log(delta);
       if (delta < threshold) {
-        console.log("close");
+        console.log("too close");
         flashEyes(1000, true);
-        sendCameraToSlack("Monkey Poacher Alert");
         speak("get lost");
       }
     }
