@@ -10,7 +10,7 @@ const handlePushEvent = (ref: string, commits: Array<any>, repo: any) => {
     const headArray = ref.split('/');
     const isMaster = headArray[headArray.length - 1] === 'master';
     if (isMaster) {
-      speak(`User ${commits[0].committer.name} committed to ${repo.name}`);
+      speak(`User ${commits[0].committer.name} pushed to ${repo.name}`);
       console.log('author: ', commits[0].author);
       console.log('committer: ', commits[0].committer.name);
     }
