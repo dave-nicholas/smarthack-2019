@@ -4,6 +4,7 @@ import { WebClient } from '@slack/client';
 import { flashEyes } from './gpio';
 import { speak }  from "./speak";
 import { Raspistill } from "node-raspistill";
+import { monkeyDance } from "./gpio";
 
 const camera = new Raspistill();
 
@@ -23,10 +24,16 @@ export const verify = (req: express.Request, res: express.Response) => {
   }
 }
 
-export const photo = (req: any, res: any) => {
+export const photo = (req: express.Request, res: express.Response) => {
   res.setHeader('Content-Type', 'application/json');
   res.send()
   sendCameraToSlack("Slack photo")
+}
+
+export const dance = (req: express.Request, res: express.Response) => {
+  res.setHeader('Content-Type', 'application/json');
+  res.send()
+  monkeyDance();
 }
 
 export const sendCameraToSlack = (message: string) => {
