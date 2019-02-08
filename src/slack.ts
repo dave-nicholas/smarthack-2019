@@ -34,6 +34,7 @@ export const dance = (req: express.Request, res: express.Response) => {
   res.setHeader('Content-Type', 'application/json');
   res.send()
   monkeyDance();
+  flashEyes(25000, true);
 }
 
 export const sendCameraToSlack = (message: string) => {
