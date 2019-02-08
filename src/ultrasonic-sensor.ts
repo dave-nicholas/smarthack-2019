@@ -1,6 +1,7 @@
 import { Gpio } from "onoff";
 import { speak } from "./speak";
 import { flashEyes } from "./gpio";
+import { sendCameraToSlack } from "./slack";
 
 const triggerGPIO = new Gpio(22, "out");
 const echoGPIO = new Gpio(23, "in", "both");
@@ -21,18 +22,18 @@ const watchHCSR04 = () => {
     } else {
       const endTick = Date.now();
       const delta = endTick - startTick;
-     
-      if(delta < threshold) { 
-        console.log('close');
+
+      if (delta < threshold) {
+        console.log("close");
         flashEyes(1000, true);
-        speak("fuck off");
+        sendCameraToSlack("Monkey Poacher Alert");
+        speak("get lost");
       }
     }
   });
 };
 
-export const watchSensor = () => { 
-
+export const watchSensor = () => {
   watchHCSR04();
 
   // Trigger a distance measurement once per second
