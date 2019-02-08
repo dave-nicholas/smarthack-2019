@@ -1,13 +1,13 @@
-import "dotenv/config"
+import "dotenv/config";
 import express from "express";
-import bodyParser from "body-parser"
-import { speak }  from "./speak";
+import bodyParser from "body-parser";
+import { speak } from "./speak";
 import { helloCutiePie } from "./sound";
-import { flashEyes } from './gpio';
+import { flashEyes } from "./gpio";
 
 import { verify, postImg, sendCameraToSlack, photo, dance } from "./slack";
-import { githubRequestHandler } from './github-request-handler';
-import { watchSensor } from './ultrasonic-sensor';
+import { githubRequestHandler } from "./github-request-handler";
+import { watchSensor } from "./ultrasonic-sensor";
 
 const app = express();
 
@@ -15,29 +15,27 @@ const port = 4567;
 
 app.use(bodyParser.json());
 
-app.post('/slack', verify);
-app.post('/photo', photo);
-app.post('/dance', dance);
+app.post("/slack", verify);
+app.post("/photo", photo);
+app.post("/dance", dance);
 
-app.get('/', (req, res) => res.send('-= SmartHack Github =-'));
+app.get("/", (req, res) => res.send("-= SmartHack Github =-"));
 
-app.post('/github', (req, res) => githubRequestHandler(req, res));
+app.post("/github", (req, res) => githubRequestHandler(req, res));
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
 const loadImg = () => {
-  
-  sendCameraToSlack("A Slack image")
-  
-}
+  sendCameraToSlack("A Slack image");
+};
 
- //loadImg();
+//loadImg();
 
 const welcome = () => {
   flashEyes(5000);
-  speak("Hello I am the smart pension git bot monkey");
-}
+  speak("Hello eveyone I am the smart pension git bot monkey");
+};
 
 watchSensor();
-  
-// welcome();
+
+welcome();
