@@ -10,7 +10,7 @@
     "build": "rm -rf build/ && tsc",
     "serve": "node build/index.js",
     "start": "npm run build && npm run serve",
-    "ngrok": "~/ngrok http 4567 -subdomain=gitmonkey",
+    "ngrok": "~/ngrok http 4567",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -34,5 +34,3 @@
     "ts-node": "^7.0.1"
   }
 }
-
-
