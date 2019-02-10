@@ -6,7 +6,9 @@ GitBot Monkey was created to enter the [Smart Pension Winter Hackathon](https://
 " target="_blank"><img src="https://github.com/dave-nicholas/smarthack-2019/blob/master/src/assets/Wiring.jpeg" 
 alt="GitBot Monkey" width="240" height="180" border="10" /></a>
 
-https://www.youtube.com/watch?v=8VatyT0dols
+[Watch video](https://www.youtube.com/watch?v=8VatyT0dols)
+
+## Features
 
 The code is designed to run on a **Raspberry PI** and is written in **Typescript** and supports the following functionality:
 
@@ -23,6 +25,7 @@ The code is designed to run on a **Raspberry PI** and is written in **Typescript
 * Flashing Eyes
 
 * Operating a relay to activate toy. 
+
 
 ## Installation
 
