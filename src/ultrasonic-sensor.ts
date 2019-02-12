@@ -21,9 +21,9 @@ const watchHCSR04 = () => {
     } else {
       const endTick = Date.now();
       const delta = endTick - startTick;
-      console.log(delta);
+      //console.log(delta);
       if (delta < threshold) {
-        console.log("too close");
+        // console.log("too close");
         flashEyes(1000, true);
         speak("get lost");
       }

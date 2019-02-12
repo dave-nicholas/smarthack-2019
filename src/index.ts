@@ -2,7 +2,6 @@ import "dotenv/config";
 import express from "express";
 import bodyParser from "body-parser";
 import { speak } from "./speak";
-import { helloCutiePie } from "./sound";
 import { flashEyes } from "./gpio";
 
 import { verify, postImg, sendCameraToSlack, photo, dance } from "./slack";

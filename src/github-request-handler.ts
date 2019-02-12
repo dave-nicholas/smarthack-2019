@@ -1,6 +1,8 @@
 import express from "express";
 import { speak } from "./speak";
+import "dotenv/config";
 import { flashEyes } from "./gpio";
+import crypto from "crypto";
 
 const EVENT_PUSH = "push";
 const EVENT_COMMIT_COMMENT = "commit_comment";
@@ -48,6 +50,19 @@ const handleIssue = (issue: any) => {
   }
 };
 
+const createComparisonSignature = (body: any) => {
+  const hmac = crypto.createHmac('sha1', process.env.GIT_WEBHOOK_SECRET || "");
+  const self_signature = hmac.update(JSON.stringify(body)).digest('hex');
+  return `sha1=${self_signature}`; // shape in GitHub header
+}
+
+const compareSignatures = (signature: string, comparison_signature: string) => {
+  const source = Buffer.from(signature);
+  const comparison = Buffer.from(comparison_signature);
+  return crypto.timingSafeEqual(source, comparison); // constant time comparison
+}
+
+
 export const githubRequestHandler = (
   req: express.Request,
   res: express.Response
@@ -58,6 +73,14 @@ export const githubRequestHandler = (
   const comment = req.body.comment;
   const issue = req.body;
   const githubEvent = req.headers["x-github-event"];
+  const signature = req.headers['x-hub-signature'] || "";
+  const comparison_signature = createComparisonSignature(req.body);
+  
+  const sigToCompare = typeof signature !== "string" ? "" : signature;
+
+  if (!compareSignatures(sigToCompare, comparison_signature)) {
+    return res.status(401).send('Mismatched signatures');
+  }
 
   switch (githubEvent) {
     case EVENT_PUSH: {
