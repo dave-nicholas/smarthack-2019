@@ -4,7 +4,10 @@ GitBot Monkey was created to enter the [Smart Pension Winter Hackathon](https://
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=8VatyT0dols
 " target="_blank"><img src="https://github.com/dave-nicholas/smarthack-2019/blob/master/src/assets/Wiring.jpeg" 
+alt="GitBot Monkey" width="360" height="270" border="10" />
+<img src="https://github.com/dave-nicholas/smarthack-2019/assets/15213588/802d4405-6821-4222-874c-572229ae48c1" 
 alt="GitBot Monkey" width="360" height="270" border="10" /></a>
+
 
 [Watch video](https://www.youtube.com/watch?v=8VatyT0dols)
 
